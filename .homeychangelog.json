@@ -1,0 +1,5 @@
+{
+  "2.1.1": {
+    "en": "More reliable gateway connection: one HomeKit session per gateway, no leaked sockets, and lost connections are detected and recovered faster. Devices now show why they are unavailable. Clearer pairing errors (M2 Error 6, M4 Error 2), one automatic retry on -70402 write errors, and thermostat write errors are no longer hidden."
+  }
+}

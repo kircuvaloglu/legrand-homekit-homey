@@ -1,0 +1,668 @@
+{
+  "id": "com.legrand.homekit.local",
+  "sdk": 3,
+  "name": "Legrand with HomeKit Code",
+  "description": {
+    "en": "Local Apple HomeKit integration and Direct Zigbee 3.0 control for Legrand Gateways and Devices"
+  },
+  "version": "2.1.1",
+  "compatibility": ">=5.0.0",
+  "author": {
+    "name": "Guray Kircuvaloglu"
+  },
+  "brand": "legrand",
+  "brandColor": "#e11a22",
+  "category": [
+    "lights",
+    "appliances",
+    "tools"
+  ],
+  "images": {
+    "small": "./assets/images/small.png",
+    "large": "./assets/images/large.png"
+  },
+  "api": {
+    "getDiagnostics": {
+      "method": "GET",
+      "path": "/diagnostics"
+    }
+  },
+  "discovery": {
+    "legrand_gateway": {
+      "type": "mdns-sd",
+      "mdns-sd": {
+        "name": "hap",
+        "protocol": "tcp"
+      }
+    }
+  },
+  "drivers": [
+    {
+      "id": "legrand_device",
+      "name": "Legrand with HomeKit Code",
+      "class": "other",
+      "capabilities": [
+        "onoff",
+        "dim",
+        "light_hue",
+        "light_saturation",
+        "light_temperature",
+        "windowcoverings_set",
+        "windowcoverings_state",
+        "measure_temperature",
+        "target_temperature",
+        "thermostat_mode",
+        "measure_humidity"
+      ],
+      "images": {
+        "small": "./drivers/legrand_device/assets/images/small.png",
+        "large": "./drivers/legrand_device/assets/images/large.png"
+      },
+      "discovery": "legrand_gateway",
+      "pair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "title": {
+              "en": "Legrand Gateway Connection"
+            },
+            "usernameLabel": {
+              "en": "Gateway IP (optional — auto-detected if empty)"
+            },
+            "passwordLabel": {
+              "en": "HomeKit PIN Code (e.g. 123-45-678)"
+            },
+            "hint": {
+              "en": "Leave the IP field empty for auto-discovery. Only fill it if auto-detection fails."
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
+      "id": "wireless_switch_zigbee",
+      "name": {
+        "en": "Wireless Switch (Zigbee)"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "measure_battery",
+        "alarm_battery"
+      ],
+      "capabilitiesOptions": {
+        "measure_battery": {
+          "preventInsights": false
+        }
+      },
+      "energy": {
+        "batteries": [
+          "CR2032"
+        ]
+      },
+      "zigbee": {
+        "manufacturerName": [
+          "Legrand",
+          " Legrand",
+          "BTicino",
+          " BTicino",
+          "Netatmo",
+          " Netatmo",
+          "Legrand\u0000",
+          "Legrand ",
+          "Legrand\u0000\u0000",
+          "Legrand  ",
+          "Legrand\u0000\u0000\u0000",
+          "Legrand   ",
+          "Legrand\u0000\u0000\u0000\u0000",
+          "Legrand    ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000",
+          "Legrand     ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Legrand      ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Legrand       ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Legrand        ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Legrand         ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Legrand          ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Legrand           ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Legrand            ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Legrand             ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Legrand              ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Legrand               ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Legrand                ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Legrand                 ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Legrand                  ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Legrand                   ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Legrand                    ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Legrand                     ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Legrand                      ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Legrand                       ",
+          "Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Legrand                        ",
+          " Legrand\u0000",
+          " Legrand ",
+          " Legrand\u0000\u0000",
+          " Legrand  ",
+          " Legrand\u0000\u0000\u0000",
+          " Legrand   ",
+          " Legrand\u0000\u0000\u0000\u0000",
+          " Legrand    ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000",
+          " Legrand     ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Legrand      ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Legrand       ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Legrand        ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Legrand         ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Legrand          ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Legrand           ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Legrand            ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Legrand             ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Legrand              ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Legrand               ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Legrand                ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Legrand                 ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Legrand                  ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Legrand                   ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Legrand                    ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Legrand                     ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Legrand                      ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Legrand                       ",
+          " Legrand\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Legrand                        ",
+          "BTicino\u0000",
+          "BTicino ",
+          "BTicino\u0000\u0000",
+          "BTicino  ",
+          "BTicino\u0000\u0000\u0000",
+          "BTicino   ",
+          "BTicino\u0000\u0000\u0000\u0000",
+          "BTicino    ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000",
+          "BTicino     ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000\u0000",
+          "BTicino      ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "BTicino       ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "BTicino        ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "BTicino         ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "BTicino          ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "BTicino           ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "BTicino            ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "BTicino             ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "BTicino              ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "BTicino               ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "BTicino                ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "BTicino                 ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "BTicino                  ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "BTicino                   ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "BTicino                    ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "BTicino                     ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "BTicino                      ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "BTicino                       ",
+          "BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "BTicino                        ",
+          " BTicino\u0000",
+          " BTicino ",
+          " BTicino\u0000\u0000",
+          " BTicino  ",
+          " BTicino\u0000\u0000\u0000",
+          " BTicino   ",
+          " BTicino\u0000\u0000\u0000\u0000",
+          " BTicino    ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000",
+          " BTicino     ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000\u0000",
+          " BTicino      ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " BTicino       ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " BTicino        ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " BTicino         ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " BTicino          ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " BTicino           ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " BTicino            ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " BTicino             ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " BTicino              ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " BTicino               ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " BTicino                ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " BTicino                 ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " BTicino                  ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " BTicino                   ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " BTicino                    ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " BTicino                     ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " BTicino                      ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " BTicino                       ",
+          " BTicino\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " BTicino                        ",
+          "Netatmo\u0000",
+          "Netatmo ",
+          "Netatmo\u0000\u0000",
+          "Netatmo  ",
+          "Netatmo\u0000\u0000\u0000",
+          "Netatmo   ",
+          "Netatmo\u0000\u0000\u0000\u0000",
+          "Netatmo    ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo     ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo      ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo       ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo        ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo         ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo          ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo           ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo            ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo             ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo              ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo               ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo                ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo                 ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo                  ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo                   ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo                    ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo                     ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo                      ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo                       ",
+          "Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Netatmo                        ",
+          " Netatmo\u0000",
+          " Netatmo ",
+          " Netatmo\u0000\u0000",
+          " Netatmo  ",
+          " Netatmo\u0000\u0000\u0000",
+          " Netatmo   ",
+          " Netatmo\u0000\u0000\u0000\u0000",
+          " Netatmo    ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo     ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo      ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo       ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo        ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo         ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo          ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo           ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo            ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo             ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo              ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo               ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo                ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo                 ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo                  ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo                   ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo                    ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo                     ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo                      ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo                       ",
+          " Netatmo\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Netatmo                        "
+        ],
+        "productId": [
+          "Remote switch",
+          " Remote switch",
+          "067773",
+          "752385",
+          "752185",
+          "752285",
+          "Wireless remote switch",
+          "Wireless Switch",
+          "Remote switch\u0000",
+          "Remote switch ",
+          "Remote switch\u0000\u0000",
+          "Remote switch  ",
+          "Remote switch\u0000\u0000\u0000",
+          "Remote switch   ",
+          "Remote switch\u0000\u0000\u0000\u0000",
+          "Remote switch    ",
+          "Remote switch\u0000\u0000\u0000\u0000\u0000",
+          "Remote switch     ",
+          "Remote switch\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Remote switch      ",
+          "Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Remote switch       ",
+          "Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Remote switch        ",
+          "Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Remote switch         ",
+          "Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Remote switch          ",
+          "Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Remote switch           ",
+          "Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Remote switch            ",
+          "Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Remote switch             ",
+          "Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Remote switch              ",
+          "Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Remote switch               ",
+          "Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Remote switch                ",
+          "Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Remote switch                 ",
+          "Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Remote switch                  ",
+          "Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Remote switch                   ",
+          "Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          "Remote switch                    ",
+          " Remote switch\u0000",
+          " Remote switch ",
+          " Remote switch\u0000\u0000",
+          " Remote switch  ",
+          " Remote switch\u0000\u0000\u0000",
+          " Remote switch   ",
+          " Remote switch\u0000\u0000\u0000\u0000",
+          " Remote switch    ",
+          " Remote switch\u0000\u0000\u0000\u0000\u0000",
+          " Remote switch     ",
+          " Remote switch\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Remote switch      ",
+          " Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Remote switch       ",
+          " Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Remote switch        ",
+          " Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Remote switch         ",
+          " Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Remote switch          ",
+          " Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Remote switch           ",
+          " Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Remote switch            ",
+          " Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Remote switch             ",
+          " Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Remote switch              ",
+          " Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Remote switch               ",
+          " Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Remote switch                ",
+          " Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Remote switch                 ",
+          " Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Remote switch                  ",
+          " Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Remote switch                   ",
+          " Remote switch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+          " Remote switch                    "
+        ],
+        "deviceId": 260,
+        "profileId": 260,
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              1,
+              3
+            ],
+            "bindings": [
+              3,
+              4,
+              5,
+              6,
+              8
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "./drivers/wireless_switch_zigbee/assets/images/learnmode.svg",
+          "instruction": {
+            "en": "Press and hold the gear (reset) button on the switch for 8 seconds until the LED turns RED, release, then tap the button repeatedly until the LED flashes GREEN."
+          }
+        }
+      },
+      "images": {
+        "small": "./drivers/wireless_switch_zigbee/assets/images/small.png",
+        "large": "./drivers/wireless_switch_zigbee/assets/images/large.png"
+      }
+    }
+  ],
+  "flow": {
+    "triggers": [
+      {
+        "id": "button_pressed",
+        "title": {
+          "en": "A button was pressed"
+        },
+        "titleFormatted": {
+          "en": "Button [[button]] was [[action]] pressed"
+        },
+        "description": {
+          "en": "Triggered when a Legrand wireless switch button is pressed"
+        },
+        "tokens": [
+          {
+            "name": "button",
+            "type": "string",
+            "title": {
+              "en": "Button"
+            }
+          },
+          {
+            "name": "action",
+            "type": "string",
+            "title": {
+              "en": "Action"
+            }
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=legrand_device|driver_id=wireless_switch_zigbee"
+          },
+          {
+            "name": "button",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "Button 1 / Top (ON)"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Button 2 / Bottom (OFF)"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "Button 3"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "Button 4"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "Button 5"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "Button 6"
+                }
+              },
+              {
+                "id": "7",
+                "label": {
+                  "en": "Button 7"
+                }
+              },
+              {
+                "id": "8",
+                "label": {
+                  "en": "Button 8"
+                }
+              }
+            ]
+          },
+          {
+            "name": "action",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "single",
+                "label": {
+                  "en": "Single Press"
+                }
+              },
+              {
+                "id": "double",
+                "label": {
+                  "en": "Double Press"
+                }
+              },
+              {
+                "id": "long",
+                "label": {
+                  "en": "Long Press (Hold)"
+                }
+              },
+              {
+                "id": "release",
+                "label": {
+                  "en": "Release"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "support": "https://community.homey.app/t/app-test-legrand-with-homekit-local-legrand-gateways-bticino-smarther-thermostats/155017",
+  "source": "https://github.com/kircuvaloglu/legrand-homekit-homey",
+  "bugs": {
+    "url": "https://github.com/kircuvaloglu/legrand-homekit-homey/issues"
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "GurayKircuvaloglu"
+      }
+    }
+  },
+  "homeyCommunityTopicId": 155017
+}

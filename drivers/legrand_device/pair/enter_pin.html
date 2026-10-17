@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #f5f5f7;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 32px 20px;
+      min-height: 100vh;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 400px;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 32px 24px 28px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      text-align: center;
+    }
+
+    .icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1c1c1e;
+      margin-bottom: 8px;
+    }
+
+    .hint {
+      font-size: 13px;
+      color: #6e6e73;
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 600;
+      color: #3c3c43;
+      margin-bottom: 6px;
+    }
+
+    input {
+      width: 100%;
+      border: 1.5px solid #d1d1d6;
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 22px;
+      letter-spacing: 3px;
+      text-align: center;
+      color: #1c1c1e;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background: #fafafa;
+    }
+
+    input:focus {
+      border-color: #5e5ce6;
+      box-shadow: 0 0 0 3px rgba(94,92,230,0.15);
+      background: #fff;
+    }
+
+    input::placeholder {
+      letter-spacing: 1px;
+      font-size: 15px;
+      font-weight: 400;
+      color: #c7c7cc;
+    }
+
+    .btn {
+      width: 100%;
+      margin-top: 20px;
+      background: #5e5ce6;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn:hover:not(:disabled) { background: #4a48d4; }
+    .btn:active:not(:disabled) { transform: scale(0.98); }
+    .btn:disabled { background: #c7c7cc; cursor: not-allowed; }
+
+    .status {
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 500;
+      min-height: 20px;
+      color: #6e6e73;
+    }
+
+    .status.error { color: #ff3b30; }
+    .status.success { color: #34c759; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 id="title">HomeKit Setup Code</h1>
+    <p class="hint" id="hint">Enter the 8-digit code from your Legrand Gateway label or app (e.g. 123-45-678)</p>
+
+    <label id="label" for="pin-input">HomeKit PIN Code</label>
+    <input type="text" id="pin-input" placeholder="123-45-678" maxlength="10" autocomplete="off" inputmode="numeric">
+
+    <button class="btn" id="connect-btn" disabled id="connect-btn">Connect</button>
+    <div class="status" id="status"></div>
+  </div>
+
+  <script>
+    const pinInput = document.getElementById('pin-input');
+    const connectBtn = document.getElementById('connect-btn');
+    const statusEl = document.getElementById('status');
+
+    pinInput.addEventListener('input', (e) => {
+      let digits = e.target.value.replace(/\D/g, '').substring(0, 8);
+      let formatted = digits;
+      if (digits.length > 5) formatted = digits.slice(0,3) + '-' + digits.slice(3,5) + '-' + digits.slice(5);
+      else if (digits.length > 3) formatted = digits.slice(0,3) + '-' + digits.slice(3);
+      e.target.value = formatted;
+      connectBtn.disabled = digits.length !== 8;
+    });
+
+    connectBtn.addEventListener('click', async () => {
+      const pin = pinInput.value;
+      connectBtn.disabled = true;
+      pinInput.disabled = true;
+      statusEl.className = 'status';
+      statusEl.textContent = 'Connecting...';
+
+      try {
+        await Homey.emit('enter_pin', { pin });
+        statusEl.className = 'status success';
+        statusEl.textContent = 'Success! Loading devices...';
+        setTimeout(() => Homey.nextView(), 1200);
+      } catch (err) {
+        connectBtn.disabled = false;
+        pinInput.disabled = false;
+        statusEl.className = 'status error';
+        statusEl.textContent = err.message || 'Error! Please check your PIN.';
+      }
+    });
+  </script>
+</body>
+</html>

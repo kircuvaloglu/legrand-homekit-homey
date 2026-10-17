@@ -1,0 +1,10 @@
+*.tar
+*.tar.gz
+*.zip
+.git
+.DS_Store
+*.log
+scratch/
+*.md
+LICENSE
+.gitignore

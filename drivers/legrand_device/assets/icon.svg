@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Switch plate outline -->
+  <rect x="22" y="12" width="56" height="76" rx="8" fill="none" stroke="#000000" stroke-width="6" stroke-linejoin="round"/>
+  <!-- Horizontal divider -->
+  <line x1="22" y1="50" x2="78" y2="50" stroke="#000000" stroke-width="5"/>
+  <!-- Top rocker (on - filled) -->
+  <rect x="35" y="22" width="30" height="18" rx="5" fill="#000000"/>
+  <!-- Bottom rocker (off - outline) -->
+  <rect x="35" y="60" width="30" height="18" rx="5" fill="none" stroke="#000000" stroke-width="4"/>
+</svg>
